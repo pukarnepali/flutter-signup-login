@@ -34,6 +34,7 @@ class _SignupScreenState extends State<SignupScreen> {
                   height: 14,
                 ),
                 TextFormField(
+                  controller: namecontroller,
                   decoration: InputDecoration(
                     prefixIcon: Icon(Icons.person),
                     labelText: "Name",
@@ -51,6 +52,7 @@ class _SignupScreenState extends State<SignupScreen> {
                 ),
                 SizedBox(height: 15),
                 TextFormField(
+                  controller: addresscontroller,
                   decoration: InputDecoration(
                     prefixIcon: Icon(Icons.location_history),
                     labelText: "Address",
@@ -66,6 +68,7 @@ class _SignupScreenState extends State<SignupScreen> {
                 ),
                 SizedBox(height: 15),
                 TextFormField(
+                  controller: emailcontroller,
                   decoration: InputDecoration(
                     prefixIcon: Icon(Icons.email),
                     labelText: "Email",
@@ -142,8 +145,8 @@ class _SignupScreenState extends State<SignupScreen> {
                       foregroundColor: Colors.white),
                   onPressed: () {
                     if (_formKey.currentState!.validate()) {
-                      ScaffoldMessenger.of(context).showSnackBar(
-                          SnackBar(content: Text("Form is validated")));
+                      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                          content: Text("Account created succssfully")));
                     }
                   },
                   child: Text("Create Account"),
