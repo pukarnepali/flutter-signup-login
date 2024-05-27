@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:sign_up/home_screen.dart';
+import 'package:sign_up/local_storage.dart';
 import 'package:sign_up/signup_screen.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -55,7 +57,16 @@ class _LoginScreenState extends State<LoginScreen> {
               style: ElevatedButton.styleFrom(
                   backgroundColor: Color.fromARGB(255, 3, 36, 184),
                   foregroundColor: Colors.white),
-              onPressed: () {},
+              onPressed: () async {
+                var localStorage = StorageHelper();
+                await localStorage.saveData(true);
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => HomeScreen(),
+                  ),
+                );
+              },
               child: Text("Login"),
             ),
             SizedBox(

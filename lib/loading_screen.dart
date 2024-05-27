@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'login_screen.dart';
+import 'package:sign_up/splah_screen.dart';
 
 class LoadingScreen extends StatefulWidget {
   const LoadingScreen({super.key});
@@ -18,7 +18,7 @@ class _LoadingScreenState extends State<LoadingScreen> {
   _navigateToLogin() async {
     await Future.delayed(Duration(seconds: 5), () {});
     Navigator.pushReplacement(
-        context, MaterialPageRoute(builder: (context) => LoginScreen()));
+        context, MaterialPageRoute(builder: (context) => const SplashScreen()));
   }
 
   @override

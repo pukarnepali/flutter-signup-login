@@ -18,6 +18,9 @@ class _SignupScreenState extends State<SignupScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.transparent,
+      ),
       body: Padding(
         padding: EdgeInsets.all(12.0),
         child: SingleChildScrollView(
@@ -145,8 +148,11 @@ class _SignupScreenState extends State<SignupScreen> {
                       foregroundColor: Colors.white),
                   onPressed: () {
                     if (_formKey.currentState!.validate()) {
-                      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                          content: Text("Account created succssfully")));
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(
+                          content: Text("Account created succssfully"),
+                        ),
+                      );
                     }
                   },
                   child: Text("Create Account"),
