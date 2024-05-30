@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:sign_up/local_storage.dart';
 
 class SignupScreen extends StatefulWidget {
   const SignupScreen({super.key});
@@ -8,12 +10,18 @@ class SignupScreen extends StatefulWidget {
 }
 
 class _SignupScreenState extends State<SignupScreen> {
-  var _formKey = GlobalKey<FormState>();
+  final _formKey = GlobalKey<FormState>();
   bool isVisible = true;
   final TextEditingController namecontroller = TextEditingController();
   final TextEditingController addresscontroller = TextEditingController();
   final TextEditingController emailcontroller = TextEditingController();
   final TextEditingController passwordcontroller = TextEditingController();
+
+  Future<void> saveData(BuildContext) async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setString('email', emailcontroller.text);
+    await prefs.setString('password', passwordcontroller.text);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -146,13 +154,18 @@ class _SignupScreenState extends State<SignupScreen> {
                   style: ElevatedButton.styleFrom(
                       backgroundColor: Color.fromARGB(255, 3, 36, 184),
                       foregroundColor: Colors.white),
-                  onPressed: () {
+                  onPressed: () async {
                     if (_formKey.currentState!.validate()) {
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(
-                          content: Text("Account created succssfully"),
-                        ),
-                      );
+                      // ScaffoldMessenger.of(context).showSnackBar(
+                      //   SnackBar(
+                      //     content: Text("Account created succssfully"),
+                      //   ),
+                      // );
+                      StorageHelper storage = StorageHelper();
+                      await storage.saveUser("email", emailcontroller.text);
+                      await storage.saveUser(
+                          "password", passwordcontroller.text);
+                      Navigator.pop(context);
                     }
                   },
                   child: Text("Create Account"),

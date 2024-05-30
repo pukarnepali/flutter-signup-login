@@ -11,6 +11,8 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
+  final emailcontroller = TextEditingController();
+  final TextEditingController passwordcontroller = TextEditingController();
   bool isVisible = true;
 
   @override
@@ -29,6 +31,7 @@ class _LoginScreenState extends State<LoginScreen> {
               height: 14,
             ),
             TextField(
+              controller: emailcontroller,
               decoration: InputDecoration(
                 prefixIcon: Icon(Icons.email),
                 labelText: "Email",
@@ -38,6 +41,7 @@ class _LoginScreenState extends State<LoginScreen> {
             ),
             SizedBox(height: 15),
             TextField(
+              controller: passwordcontroller,
               obscureText: isVisible,
               decoration: InputDecoration(
                 suffixIcon: IconButton(
@@ -59,13 +63,25 @@ class _LoginScreenState extends State<LoginScreen> {
                   foregroundColor: Colors.white),
               onPressed: () async {
                 var localStorage = StorageHelper();
-                await localStorage.saveData(true);
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => HomeScreen(),
-                  ),
-                );
+                var saveEmail = await localStorage.getUser("email");
+                var savePassword = await localStorage.getUser("password");
+                if (emailcontroller.text == saveEmail &&
+                    passwordcontroller.text == savePassword) {
+                  await localStorage.saveData(true);
+                  Navigator.pushAndRemoveUntil(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => HomeScreen(),
+                    ),
+                    (route) => (false),
+                  );
+                } else {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(
+                      content: Text("Invalid Credential"),
+                    ),
+                  );
+                }
               },
               child: Text("Login"),
             ),

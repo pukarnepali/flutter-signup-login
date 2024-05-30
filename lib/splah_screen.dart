@@ -24,18 +24,20 @@ class _SplashScreenState extends State<SplashScreen> {
       Duration(milliseconds: 2000),
       () {
         if (isLogin == true) {
-          Navigator.push(
+          Navigator.pushAndRemoveUntil(
             context,
             MaterialPageRoute(
               builder: (context) => HomeScreen(),
             ),
+            (route) => (false),
           );
         } else {
-          Navigator.push(
+          Navigator.pushAndRemoveUntil(
             context,
             MaterialPageRoute(
               builder: (context) => LoginScreen(),
             ),
+            (route) => (false),
           );
         }
       },

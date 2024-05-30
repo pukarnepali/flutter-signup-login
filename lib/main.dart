@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:sign_up/loading_screen.dart';
+import 'package:sign_up/splah_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -18,7 +18,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const LoadingScreen(),
+      home: const SplashScreen(),
     );
   }
 }
